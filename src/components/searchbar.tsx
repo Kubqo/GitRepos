@@ -36,7 +36,7 @@ const SearchBar: React.FC = () => {
                     <div className="input">
                         <Form>   
                             <Field 
-                                style = {{width: "15%", marginTop: "10%"}} 
+                                style = {{width: 200, marginTop: "10%"}} 
                                 name="username" 
                                 placeholder = "Git User"/>
 
