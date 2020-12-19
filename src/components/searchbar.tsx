@@ -3,27 +3,58 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { Input } from 'antd';
 import { useHistory } from "react-router-dom";
+import Theme from "./theme"
+import * as yup from 'yup'
+import { Field, Form, Formik } from 'formik';
+import { SearchOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 
 
 const SearchBar: React.FC = () => {
     const history = useHistory();
-    const onSearch = (value:string) => history.push({
-        pathname: '/User',
-        search: value,
-        state: value 
-    });;
-
+    
+    const validationSchema = yup.object().shape({
+       username: yup.string().required("Git username is required")})     
+    
     return(
-        <>
-            <h1 style = {{marginTop:"5%"}}> Repositories and Organisations of Git User</h1>
-            <Search 
-              style = {{width: 400, marginTop:"10%"}} 
-              placeholder="Enter username on Git" 
-              onSearch={(onSearch)} 
-              enterButton />
-        </>
+        <div>
+            {/* <Theme/> */}
+            <h1 style = {{paddingTop:"5%"}}> Repositories and Organisations of Git User</h1> 
+
+            <Formik
+                initialValues={{
+                    username: "",
+                }}
+                onSubmit={(values) => history.push({
+                    pathname: '/User',
+                    search: values.username,
+                    state: values.username, })}
+                validationSchema={validationSchema}>
+                
+                {({ errors, touched}) => (
+                    <div className="input">
+                        <Form>   
+                            <Field 
+                                style = {{width: "15%", marginTop: "10%"}} 
+                                name="username" 
+                                placeholder = "Git User"/>
+
+                            <button className = "ant-btn-primary"
+                                type="submit">
+                                {<SearchOutlined />} Search
+                            </button>
+
+                            {errors.username && touched.username ? (
+                                <div>{errors.username}</div>) : null}
+                        </Form> 
+                    </div>
+            
+                )}
+            </Formik>
+            
+            
+        </div>
     )
 }
 
