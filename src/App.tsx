@@ -13,15 +13,15 @@ function App() {
   return (
     <Router>
       <div className="App">
-          <Switch>
-            <Route path="/Search" component={SearchBar} />
-            <Route path="/User" component={UserInfo} />
+        <Switch>
+          <Route path="/Search" component={SearchBar} />
+          <Route path="/User" component={UserInfo} />
 
-            <Route path="">
-              <Redirect to="/Search" />
-            </Route>
-          </Switch>
-        </div>
+          <Route path="">
+            <Redirect to="/Search" />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }
