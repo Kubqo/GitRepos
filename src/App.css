@@ -6,13 +6,13 @@
   color: var(--theme-page-text);
 }
 .Light {
-  --theme-color: #A80000;
-  --theme-page-background: #FFF;
+  --theme-color: #a80000;
+  --theme-page-background: #fff;
   --theme-page-text: #111;
 }
 
 .Dark {
-  --theme-color: #0000A8;
-  --theme-page-background: #18191a ;
-  --theme-page-text: #FFF;
+  --theme-color: #0000a8;
+  --theme-page-background: #18191a;
+  --theme-page-text: #fff;
 }
