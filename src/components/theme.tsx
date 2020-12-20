@@ -1,17 +1,31 @@
 import React from "react";
 import { Switch } from "antd";
+import { useTheme, Theme } from './ThemeContext';
 
-const Theme: React.FC = () => {
+const ThemeButton: React.FC = () => {
+
+  const { theme, setTheme } = useTheme();
+
+  const setThemeButton  = () => {
+    if (theme === "Light") {
+      setTheme(Theme.Dark)
+    }else{
+      setTheme(Theme.Light)
+    }
+
+  }
+
   return (
     <>
       <Switch
         style={{ float: "right", marginTop: 20, marginRight: 20 }}
         checkedChildren="Light"
         unCheckedChildren="Dark"
-        defaultChecked
+        defaultChecked = {false}
+        onChange={() => setThemeButton()}
       />
     </>
   );
 };
 
-export default Theme;
+export default ThemeButton;

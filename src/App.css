@@ -1,15 +1,18 @@
 .App {
   text-align: center;
-  height: 100%;
-  /* background-color: #1a1919; */
+  min-height: 100%;
+
+  background: var(--theme-page-background);
+  color: var(--theme-page-text);
+}
+.Light {
+  --theme-color: #A80000;
+  --theme-page-background: #FFF;
+  --theme-page-text: #111;
 }
 
-.light-mode {
-  background-color: #fff;
-  color: #333;
-}
-
-.dark-mode {
-  background-color: #1a1919;
-  color: #999;
+.Dark {
+  --theme-color: #0000A8;
+  --theme-page-background: #18191a ;
+  --theme-page-text: #FFF;
 }

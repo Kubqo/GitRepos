@@ -1,14 +1,11 @@
 import React from "react";
 import "antd/dist/antd.css";
-import "../index.css";
-import { Input } from "antd";
+import "../App.css";
 import { useHistory } from "react-router-dom";
-import Theme from "./theme";
 import * as yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { SearchOutlined } from "@ant-design/icons";
-
-const { Search } = Input;
+import ThemeButton from './theme'
 
 const SearchBar: React.FC = () => {
   const history = useHistory();
@@ -19,9 +16,9 @@ const SearchBar: React.FC = () => {
 
   return (
     <div>
-      {/* <Theme/> */}
-      <h1 style={{ paddingTop: "5%" }}>
-        {" "}
+      <ThemeButton/>
+      
+      <h1 style={{ paddingTop: "5%", color: "var(--theme-page-text)" }}>
         Repositories and Organisations of Git User
       </h1>
 
@@ -42,7 +39,7 @@ const SearchBar: React.FC = () => {
           <div className="input">
             <Form>
               <Field
-                style={{ width: 200, marginTop: "10%" }}
+                style={{ width: 200, marginTop: "10%", color: "black" }}
                 name="username"
                 placeholder="Git User"
               />
