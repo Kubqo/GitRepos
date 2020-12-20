@@ -19,6 +19,7 @@ function getUserData(username: string) {
       user: user.data,
       orgs: orgs.data
     }))
+    
 }
 
 export { getRepos, getUserData };

@@ -3,7 +3,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import { getRepos, getUserData } from "./data";
 import { Avatar, Button, Card, Spin, Statistic } from "antd";
 import { LeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import ThemeButton from "./theme";
 import Meta from "antd/lib/card/Meta";
 import Modal from "antd/lib/modal/Modal";
 
@@ -15,6 +14,7 @@ const UserInfo: React.FC = () => {
   const [repos, setRepos] = useState<[]>([]);
   const [org, setOrg] = useState<[]>([]);
   const [picture, setPicture] = useState<string>();
+  const [isError, setIsError] = useState<boolean>(false);
 
   const [visibleRepos, setVisibleRepos] = useState(false);
   const [visibleOrgs, setVisibleOrgs] = useState(false);
@@ -23,21 +23,24 @@ const UserInfo: React.FC = () => {
 
   // This will get you data from api and set it to useState hooks
   const Fetch = async (username: string) => {
-    console.log(org);
-    const repos = await getRepos(username);
-    const orgAndData = await getUserData(username);
+    try {
+      const repos = await getRepos(username);
+      const orgAndData = await getUserData(username);
 
-    const onlyNames = repos.map((element: { name: string }) => element.name);
-    const onlyOrgsNames = orgAndData.orgs.map(
-      (element: { login: string }) => element.login
-    );
-    const pic = orgAndData.user.avatar_url;
+      const onlyNames = repos.map((element: { name: string }) => element.name);
+      const onlyOrgsNames = orgAndData.orgs.map(
+        (element: { login: string }) => element.login
+      );
+      const pic = orgAndData.user.avatar_url;
 
-    setOrg(onlyOrgsNames);
-    setRepos(onlyNames);
-    setPicture(pic);
+      setOrg(onlyOrgsNames);
+      setRepos(onlyNames);
+      setPicture(pic);
 
-    setIsLoading(false);
+      setIsLoading(false);
+    } catch (err) {
+      setIsError(true);
+    }
   };
 
   // Get informations from api once
@@ -57,7 +60,11 @@ const UserInfo: React.FC = () => {
         Info About {location.state}
       </h1>
 
-      {isLoading ? (
+      {isError ? (
+        <h2 style={{ color: "var(--theme-page-text)", paddingTop: "5%" }}>
+          User Not Found
+        </h2>
+      ) : isLoading ? (
         <Spin indicator={antIcon} />
       ) : (
         <div>
@@ -86,9 +93,7 @@ const UserInfo: React.FC = () => {
             centered
             visible={visibleRepos}
             onCancel={() => setVisibleRepos(false)}
-            footer={[
-
-            ]}
+            footer={[]}
           >
             {repos.length === 0 ? (
               <div style={{ textAlign: "center" }}>No Repositories to show</div>
@@ -113,9 +118,7 @@ const UserInfo: React.FC = () => {
             centered
             visible={visibleOrgs}
             onCancel={() => setVisibleOrgs(false)}
-            footer={[
-
-            ]}
+            footer={[]}
           >
             {org.length === 0 ? (
               <div style={{ textAlign: "center" }}>

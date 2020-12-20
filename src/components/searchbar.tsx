@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { SearchOutlined } from "@ant-design/icons";
-import ThemeButton from './theme'
 
 const SearchBar: React.FC = () => {
   const history = useHistory();
