@@ -9,7 +9,6 @@ Please run command `npm i` in your direcotry to install dependecies
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-
+## Docker Image
+If you are interested in docker image here it is on docker hub: https://hub.docker.com/repository/docker/kubqo/gitrep#
+aplication is running on port 80 and is hosted here: http://gitrepos.jakubduris.com/
