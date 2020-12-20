@@ -13,8 +13,7 @@ import ThemeButton from "./components/theme";
 
 function App() {
   const [theme, setTheme] = React.useState(Theme.Light);
-  // localStorage.setItem("theme", "Light")
-  // console.log( localStorage.getItem("theme"))
+
   return (
     <Router>
       <ThemeContext.Provider value={{ theme, setTheme }}>
