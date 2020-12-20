@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import UserInfo from "./components/userinfo";
 import { ThemeContext, Theme } from "./components/ThemeContext";
+import ThemeButton from "./components/theme";
 
 function App() {
   const [theme, setTheme] = React.useState(Theme.Light);
@@ -17,6 +18,7 @@ function App() {
     <Router>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <div className={`App ${theme}`}>
+        <ThemeButton/>
           <Switch>
             <Route path="/Search" component={SearchBar} />
             <Route path="/User" component={UserInfo} />

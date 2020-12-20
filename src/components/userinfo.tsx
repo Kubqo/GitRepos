@@ -2,17 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { getRepos, getUserData } from "./data";
 import { Avatar, Button, Card, Spin, Statistic } from "antd";
-import {
-  CodeOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  LeftOutlined,
-  LoadingOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { LeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import ThemeButton from "./theme";
 import Meta from "antd/lib/card/Meta";
-import { Theme } from "./ThemeContext";
 import Modal from "antd/lib/modal/Modal";
 
 const UserInfo: React.FC = () => {
@@ -31,14 +23,16 @@ const UserInfo: React.FC = () => {
 
   // This will get you data from api and set it to useState hooks
   const Fetch = async (username: string) => {
+    console.log(org);
     const repos = await getRepos(username);
     const orgAndData = await getUserData(username);
+
     const onlyNames = repos.map((element: { name: string }) => element.name);
     const onlyOrgsNames = orgAndData.orgs.map(
       (element: { login: string }) => element.login
     );
     const pic = orgAndData.user.avatar_url;
-    
+
     setOrg(onlyOrgsNames);
     setRepos(onlyNames);
     setPicture(pic);
@@ -53,9 +47,6 @@ const UserInfo: React.FC = () => {
 
   return (
     <>
-      {/* This Button is changing theme */}
-      <ThemeButton />
-      {/* This Button will take you to Search page */}
       <Button
         shape="circle"
         icon={<LeftOutlined />}
@@ -81,7 +72,6 @@ const UserInfo: React.FC = () => {
               avatar={
                 <Avatar src={picture} style={{ width: 125, height: 125 }} />
               }
-              // title={}
               description={
                 <div style={{ display: "inline-block" }}>
                   <Statistic title="Repositories" value={repos.length} />
@@ -91,43 +81,56 @@ const UserInfo: React.FC = () => {
             />
           </Card>
 
-          {/* <h2 style={{ color: "var(--theme-page-text)" }}>Repos:</h2>
-          {repos.map((element) => (
-            <p key={element}> {element} </p>
-          ))}
-
-          <h2 style={{ color: "var(--theme-page-text)" }}>Orgs:</h2>
-          {}
-
-          {org.map((element) => (
-            <p key={element}> {element} </p>
-          ))}
-           */}
           <Modal
             title="Repositories"
             centered
             visible={visibleRepos}
-            onOk={() => setVisibleRepos(false)}
             onCancel={() => setVisibleRepos(false)}
+            footer={[
+
+            ]}
           >
-            {repos.map((element) => (
-            <p key={element}> {element} </p>
-          ))}
+            {repos.length === 0 ? (
+              <div style={{ textAlign: "center" }}>No Repositories to show</div>
+            ) : (
+              repos.map((element) => (
+                <div key={element} style={{ textAlign: "center" }}>
+                  <a
+                    key={element}
+                    href={`https://github.com/${String(
+                      location.state
+                    )}/${element}`}
+                  >
+                    <b> {element} </b>
+                  </a>
+                </div>
+              ))
+            )}
           </Modal>
 
           <Modal
             title="Organizations"
             centered
             visible={visibleOrgs}
-            onOk={() => setVisibleOrgs(false)}
             onCancel={() => setVisibleOrgs(false)}
+            footer={[
+
+            ]}
           >
-            {org.map((element) => (
-            <p key={element}> {element} </p>
-          ))}
+            {org.length === 0 ? (
+              <div style={{ textAlign: "center" }}>
+                No Organizations to show
+              </div>
+            ) : (
+              org.map((element) => (
+                <div key={element} style={{ textAlign: "center" }}>
+                  <a key={element} href={`https://github.com/${element}`}>
+                    <b> {element} </b>{" "}
+                  </a>
+                </div>
+              ))
+            )}
           </Modal>
-
-
         </div>
       )}
     </>

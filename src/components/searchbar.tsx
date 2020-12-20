@@ -16,7 +16,6 @@ const SearchBar: React.FC = () => {
 
   return (
     <div>
-      <ThemeButton/>
       
       <h1 style={{ paddingTop: "5%", color: "var(--theme-page-text)" }}>
         Repositories and Organisations of Git User

@@ -18,7 +18,7 @@ function getUserData(username: string) {
     .then(([user, orgs]) => ({
       user: user.data,
       orgs: orgs.data
-    }));
+    }))
 }
 
 export { getRepos, getUserData };
