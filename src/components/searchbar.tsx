@@ -2,16 +2,12 @@ import React from "react";
 import "antd/dist/antd.css";
 import "../App.css";
 import { useHistory } from "react-router-dom";
-import * as yup from "yup";
-import { Field, Form, Formik } from "formik";
 import { SearchOutlined } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
+import FormItem from "antd/lib/form/FormItem";
 
 const SearchBar: React.FC = () => {
   const history = useHistory();
-
-  const validationSchema = yup.object().shape({
-    username: yup.string().required("Git username is required"),
-  });
 
   return (
     <div>
@@ -19,39 +15,49 @@ const SearchBar: React.FC = () => {
         Repositories and Organisations of Git User
       </h1>
 
-      <Formik
-        initialValues={{
-          username: "",
-        }}
-        onSubmit={(values) =>
+      <Form
+        name="basic"
+        onFinish={(value: { username: string }) =>
           history.push({
             pathname: "/User",
-            search: values.username,
-            state: values.username,
+            search: value.username,
+            state: value.username,
           })
         }
-        validationSchema={validationSchema}
+        // onFinishFailed={(err) => console.log(err)}
       >
-        {({ errors, touched }) => (
-          <div className="input">
-            <Form>
-              <Field
-                style={{ width: 200, marginTop: "10%", color: "black" }}
-                name="username"
-                placeholder="Git User"
-              />
+        <div
+          style={{
+            width: 349.02,
+            margin: "auto",
+            paddingTop: "10%",
+            display: "inline-block",
+          }}
+        >
+          <FormItem
+            style={{ width: 270, float: "left" }}
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input Git username!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              placeholder="Git username"
+              prefix={<SearchOutlined />}
+            />
+          </FormItem>
 
-              <button className="ant-btn-primary" type="submit">
-                {<SearchOutlined />} Search
-              </button>
-
-              {errors.username && touched.username ? (
-                <div>{errors.username}</div>
-              ) : null}
-            </Form>
-          </div>
-        )}
-      </Formik>
+          <FormItem style={{ float: "right", margin: "auto" }}>
+            <Button size="large" type="primary" htmlType="submit">
+              Search
+            </Button>
+          </FormItem>
+        </div>
+      </Form>
     </div>
   );
 };
