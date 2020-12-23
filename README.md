@@ -10,5 +10,5 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Docker Image
-If you are interested in docker image here it is on docker hub: https://hub.docker.com/repository/docker/kubqo/gitrep#
+If you are interested in docker image here it is on docker hub: https://hub.docker.com/repository/docker/kubqo/gitrepos
 aplication is running on port 80 and is hosted here: http://gitrepos.jakubduris.com/
