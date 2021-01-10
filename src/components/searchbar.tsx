@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import "../App.css";
 import { useHistory } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { AutoComplete, Button, Form, Input } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 
 const SearchBar: React.FC = () => {
@@ -28,14 +28,14 @@ const SearchBar: React.FC = () => {
       >
         <div
           style={{
-            width: 349.02,
+            minWidth: 297.02,
             margin: "auto",
             paddingTop: "10%",
             display: "inline-block",
           }}
         >
           <FormItem
-            style={{ width: 270, float: "left" }}
+            style={{ float: "left" }}
             name="username"
             rules={[
               {
