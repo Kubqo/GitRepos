@@ -1,4 +1,4 @@
-# Getting Started with Repos-and-Org-of-Git-User
+# Getting Started with Git Repos
 
 ## For first:
 
